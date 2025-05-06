@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Showcase</title>
+  <style>
+    :root {
+      --bg-color-light: #f5f5f5;
+      --bg-color-dark: #121212;
+      --text-color-light: #121212;
+      --text-color-dark: #f5f5f5;
+      --accent-color: #8e44ad;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color-light);
+      color: var(--text-color-light);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    body.dark {
+      background-color: var(--bg-color-dark);
+      color: var(--text-color-dark);
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: inherit;
+    }
+    .lang-switch {
+      padding: 0.3rem;
+      border-radius: 6px;
+      border: 1px solid currentColor;
+      background: transparent;
+      color: inherit;
+    }
+    h1 {
+      font-size: 2rem;
+      margin: 0;
+    }
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      padding: 2rem;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+    .pricing {
+      text-align: center;
+      margin: 2rem;
+      font-size: 1.2rem;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+    .button {
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .button:hover {
+      background-color: #732d91;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 data-en="Our Products" data-fr="Nos Produits">Our Products</h1>
+    <div>
+      <button class="theme-toggle" id="theme-icon" aria-label="Toggle Theme">&#9790;</button>
+      <select class="lang-switch">
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+      </select>
+    </div>
+  </header>
+  <main>
+    <div class="gallery">
+      <img src="/images/leather_walletfront.png" alt="Product on bed">
+      <img src="/images/leather_walletfront.png" alt="Product in pocket at wine bar">
+    </div>
+    <div class="pricing">
+      <p><span data-en="Price:" data-fr="Prix:">Price:</span> <span id="price">Loading...</span></p>
+      <button class="button" data-en="Buy Now" data-fr="Acheter">Buy Now</button>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2025 Stylish Gear</p>
+  </footer>
+  <script>
+    const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const body = document.body;
+    const themeIcon = document.getElementById('theme-icon');
+
+    function setTheme(dark) {
+      if (dark) {
+        body.classList.add('dark');
+        themeIcon.innerHTML = '&#9728;';
+      } else {
+        body.classList.remove('dark');
+        themeIcon.innerHTML = '&#9790;';
+      }
+    }
+
+    setTheme(userPrefersDark);
+
+    themeIcon.addEventListener('click', () => {
+      body.classList.toggle('dark');
+      themeIcon.innerHTML = body.classList.contains('dark') ? '&#9728;' : '&#9790;';
+    });
+
+    document.querySelector('.lang-switch').addEventListener('change', (e) => {
+      const lang = e.target.value;
+      document.querySelectorAll('[data-en]').forEach(el => {
+        el.textContent = el.dataset[lang];
+      });
+    });
+
+    function fetchPriceByLocation() {
+      const userRegion = navigator.language.includes('fr') ? 'FR' : 'US';
+      const prices = { US: '$49.99', FR: '€44.99' };
+      document.getElementById('price').textContent = prices[userRegion] || '$49.99';
+    }
+
+    fetchPriceByLocation();
+  </script>
+</body>
+</html>
