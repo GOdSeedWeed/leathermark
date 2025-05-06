@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-theme>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -130,8 +131,63 @@
     .social-icons a:hover {
       transform: scale(1.1);
     }
+
+    .hero-section {
+      background: url('./assets/images/hero-wallet.jpg') no-repeat center center;
+      background-size: cover;
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-overlay {
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      /* Adjust for dark/light mode later */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-content {
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .hero-content p {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+    }
+
+    .explore-btn {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid #fff;
+      padding: 10px 20px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    .explore-btn:hover {
+      background-color: #fff;
+      color: #000;
+    }
   </style>
 </head>
+
 <body>
   <header>
     <div class="brand">LeatherCraft</div>
@@ -142,10 +198,16 @@
     </div>
   </header>
 
-  <section class="landing">
-    <h1 id="tagline">Leather that tells a story ...</h1>
-    <a href="#categories">Explore Now &gt;</a>
+  <section class="hero-section">
+    <div class="hero-overlay">
+      <div class="hero-content">
+        <h1>Crafted with soul.<br>Worn with pride.</h1>
+        <p>Leather that tells a story ...</p>
+        <a href="#categories" class="explore-btn">Explore Now &gt;</a>
+      </div>
+    </div>
   </section>
+
 
   <section id="categories" class="category-grid">
     <div class="category" onclick="goToCategory('bags')">Bags</div>
@@ -187,4 +249,5 @@
     }
   </script>
 </body>
+
 </html>
